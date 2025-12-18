@@ -11,6 +11,7 @@ import PostList from './components/PostList';
 import FilterBar from './components/FilterBar';
 import Profile from './components/Profile';
 import PageTransition from './components/PageTransition';
+import HeroSection from './components/HeroSection';
 import { useTheme } from './context/ThemeContext';
 import { designTokens } from './theme/designTokens';
 
@@ -18,7 +19,7 @@ function App() {
   const { mode } = useTheme();
   const theme = createAppTheme(mode);
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentView, setCurrentView] = useState('feed');
+  const [currentView, setCurrentView] = useState('discover');
   const [posts, setPosts] = useState(mockPosts);
   const [filteredPosts, setFilteredPosts] = useState(mockPosts);
   const [isClient, setIsClient] = useState(false);
@@ -137,15 +138,34 @@ function App() {
         <Box
           sx={{
             minHeight: '100vh',
+            backgroundColor: designTokens.colors.background,
             paddingBottom: `calc(${designTokens.components.bottomNav.height} + ${designTokens.spacing.lg})`,
           }}
         >
+          {/* Discover View (Hero + Feed) */}
+          {currentView === 'discover' && isClient && (
+            <PageTransition>
+              <Box>
+                {/* Hero Section */}
+                <HeroSection onGetStarted={() => setCurrentView('feed')} />
+
+                {/* Featured Content */}
+                <Container maxWidth="lg" sx={{ py: designTokens.spacing.xxl }}>
+                  <Box sx={{ mb: designTokens.spacing.lg }}>
+                    <FilterBar categories={categories} onFilterChange={handleFilterChange} />
+                  </Box>
+                  <PostList posts={filteredPosts} defaultView="grid" />
+                </Container>
+              </Box>
+            </PageTransition>
+          )}
+
           {/* Feed View */}
           {currentView === 'feed' && isClient && (
             <PageTransition>
-              <Container maxWidth="sm" sx={{ py: designTokens.spacing.lg }}>
+              <Container maxWidth="lg" sx={{ py: designTokens.spacing.lg }}>
                 {/* Create Post Form */}
-                <Box sx={{ mb: designTokens.spacing.xl }}>
+                <Box sx={{ mb: designTokens.spacing.xl, maxWidth: '600px', margin: '0 auto' }}>
                   <PostForm onSubmit={handleSubmitPost} currentUser={currentUser} />
                 </Box>
 
@@ -155,7 +175,16 @@ function App() {
                 </Box>
 
                 {/* Posts List */}
-                <PostList posts={filteredPosts} />
+                <PostList posts={filteredPosts} onUpdatePosts={setPosts} />
+              </Container>
+            </PageTransition>
+          )}
+
+          {/* Create View */}
+          {currentView === 'create' && isClient && (
+            <PageTransition>
+              <Container maxWidth="sm" sx={{ py: designTokens.spacing.xl }}>
+                <PostForm onSubmit={handleSubmitPost} currentUser={currentUser} />
               </Container>
             </PageTransition>
           )}
@@ -163,7 +192,11 @@ function App() {
           {/* Profile View */}
           {currentView === 'profile' && isClient && (
             <PageTransition>
-              <Profile username={currentUser} userPosts={posts.filter((post) => post.author === currentUser)} onBack={() => setCurrentView('feed')} />
+              <Profile
+                username={currentUser}
+                userPosts={posts.filter((post) => post.author === currentUser)}
+                onBack={() => setCurrentView('feed')}
+              />
             </PageTransition>
           )}
         </Box>

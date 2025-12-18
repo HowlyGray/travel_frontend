@@ -1,5 +1,5 @@
 /**
- * PostCard.js - Individual post card with image, content, and interactions
+ * PostCard.js - Carte de post moderne inspirée Instagram/Pinterest
  */
 
 import React, { useState } from 'react';
@@ -13,10 +13,18 @@ import {
   DialogContent,
   TextField,
   Button,
+  Chip,
 } from '@mui/material';
-import { Comment as CommentIcon } from '@mui/icons-material';
+import {
+  Comment as CommentIcon,
+  LocationOn as LocationIcon,
+  MoreVert as MoreVertIcon,
+  Bookmark as BookmarkIcon,
+  BookmarkBorder as BookmarkBorderIcon,
+} from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import SurfaceCard from './SurfaceCard';
+import { motion } from 'framer-motion';
+import ShareButton from './ShareButton';
 import LikeButton from './LikeButton';
 import LazyImage from './LazyImage';
 import { designTokens } from '../theme/designTokens';
@@ -25,6 +33,8 @@ const PostCard = ({ post, onUpdate }) => {
   const { t } = useTranslation();
   const [commentDialogOpen, setCommentDialogOpen] = useState(false);
   const [newComment, setNewComment] = useState('');
+  const [currentImageIndex] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -45,139 +55,286 @@ const PostCard = ({ post, onUpdate }) => {
     }
   };
 
-  const imageUrl = post.images?.[0]?.url || 'https://via.placeholder.com/400x300?text=No+Image';
+  const images = post.images || [];
+  const hasMultipleImages = images.length > 1;
 
   return (
     <>
-      <SurfaceCard elevation="sm" padding="md" role="article" aria-label={`Post by ${post.author}: ${post.title}`}>
-        {/* Header */}
+      <Box
+        component={motion.div}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        role="article"
+        aria-label={`Post by ${post.author}: ${post.title}`}
+        sx={{
+          backgroundColor: designTokens.colors.surface,
+          borderRadius: designTokens.components.card.borderRadius,
+          boxShadow: designTokens.shadows.card,
+          overflow: 'hidden',
+          transition: designTokens.transitions.base,
+          '&:hover': {
+            boxShadow: designTokens.shadows.cardHover,
+            transform: 'translateY(-4px)',
+          },
+        }}
+      >
+        {/* Header - Style Instagram */}
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            mb: designTokens.spacing.md,
+            p: designTokens.components.postCard.contentPadding,
+            pb: designTokens.spacing.sm,
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: designTokens.spacing.sm }}>
-            <Avatar sx={{ backgroundColor: designTokens.colors.secondary }}>
+            <Avatar
+              sx={{
+                width: designTokens.components.avatar.sm,
+                height: designTokens.components.avatar.sm,
+                background: designTokens.colors.gradientPrimary,
+                fontWeight: designTokens.typography.fontWeight.semibold,
+              }}
+            >
               {post.author?.charAt(0).toUpperCase()}
             </Avatar>
             <Box>
-              <Typography variant="body2" sx={{ fontWeight: designTokens.typography.fontWeight.semibold }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontWeight: designTokens.typography.fontWeight.semibold,
+                  color: designTokens.colors.textPrimary,
+                  fontSize: designTokens.typography.fontSize.sm,
+                }}
+              >
                 {post.author}
               </Typography>
-              <Typography
-                variant="caption"
-                sx={{ color: designTokens.colors.textTertiary }}
-              >
-                {new Date(post.date).toLocaleDateString()}
-              </Typography>
+              {post.location && (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <LocationIcon
+                    sx={{
+                      fontSize: '14px',
+                      color: designTokens.colors.textTertiary,
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: designTokens.colors.textSecondary,
+                      fontSize: designTokens.typography.fontSize.xs,
+                    }}
+                  >
+                    {post.location}
+                  </Typography>
+                </Box>
+              )}
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: 'inline-block',
-              padding: `${designTokens.spacing.xs} ${designTokens.spacing.sm}`,
-              backgroundColor: 'rgba(255, 107, 107, 0.1)',
-              borderRadius: designTokens.borderRadius.full,
-              fontSize: designTokens.typography.fontSize.xs,
-              fontWeight: designTokens.typography.fontWeight.medium,
-              color: designTokens.colors.primary,
-            }}
-            role="region"
-            aria-label="Category"
-          >
-            {post.category}
-          </Box>
+          <IconButton size="small" sx={{ color: designTokens.colors.textSecondary }}>
+            <MoreVertIcon fontSize="small" />
+          </IconButton>
         </Box>
 
-        {/* Title */}
-        <Typography
-          variant="h5"
+        {/* Image - Pleine largeur comme Instagram */}
+        <Box
           sx={{
-            mb: designTokens.spacing.sm,
-            fontWeight: designTokens.typography.fontWeight.bold,
+            position: 'relative',
+            width: '100%',
+            backgroundColor: designTokens.colors.gray100,
           }}
-          component="h2"
         >
-          {post.title}
-        </Typography>
+          {images.length > 0 ? (
+            <LazyImage
+              src={images[currentImageIndex]?.url || 'https://via.placeholder.com/600x400?text=No+Image'}
+              alt={`Image ${currentImageIndex + 1} from ${post.title}`}
+              height="auto"
+              borderRadius="0"
+              sx={{
+                width: '100%',
+                maxHeight: '500px',
+                objectFit: 'cover',
+              }}
+            />
+          ) : (
+            <Box
+              sx={{
+                width: '100%',
+                height: '400px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: designTokens.colors.gray200,
+              }}
+            >
+              <Typography variant="body2" sx={{ color: designTokens.colors.textTertiary }}>
+                Aucune image
+              </Typography>
+            </Box>
+          )}
 
-        {/* Location */}
-        {post.location && (
+          {/* Indicateurs d'images multiples */}
+          {hasMultipleImages && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: designTokens.spacing.md,
+                right: designTokens.spacing.md,
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                color: designTokens.colors.white,
+                padding: '6px 12px',
+                borderRadius: designTokens.borderRadius.full,
+                fontSize: designTokens.typography.fontSize.xs,
+                fontWeight: designTokens.typography.fontWeight.semibold,
+              }}
+            >
+              {currentImageIndex + 1} / {images.length}
+            </Box>
+          )}
+        </Box>
+
+        {/* Actions - Style Instagram */}
+        <Box sx={{ p: designTokens.components.postCard.contentPadding, pt: designTokens.spacing.sm }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mb: designTokens.spacing.sm,
+            }}
+            role="group"
+            aria-label="Post interactions"
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <LikeButton likeCount={post.likes?.length || 0} />
+
+              <IconButton
+                size="medium"
+                onClick={() => setCommentDialogOpen(true)}
+                aria-label="Open comments"
+                sx={{
+                  color: designTokens.colors.textPrimary,
+                  '&:hover': {
+                    backgroundColor: designTokens.colors.overlayLight,
+                  },
+                }}
+              >
+                <CommentIcon />
+              </IconButton>
+
+              <ShareButton
+                url={`https://example.com/post/${post.id}`}
+                title={post.title}
+                description={post.description}
+              />
+            </Box>
+
+            <IconButton
+              size="medium"
+              onClick={() => setIsSaved(!isSaved)}
+              aria-label={isSaved ? 'Unsave' : 'Save'}
+              sx={{
+                color: designTokens.colors.textPrimary,
+                '&:hover': {
+                  backgroundColor: designTokens.colors.overlayLight,
+                },
+              }}
+            >
+              {isSaved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+            </IconButton>
+          </Box>
+
+          {/* Likes count */}
           <Typography
             variant="body2"
             sx={{
-              mb: designTokens.spacing.md,
-              color: designTokens.colors.textSecondary,
+              fontWeight: designTokens.typography.fontWeight.semibold,
+              mb: designTokens.spacing.xs,
+              color: designTokens.colors.textPrimary,
             }}
           >
-            📍 <span role="region" aria-label="Location">{post.location}</span>
+            {post.likes?.length || 0} {t('likes', 'j\'aime')}
           </Typography>
-        )}
 
-        {/* Image */}
-        <LazyImage
-          src={imageUrl}
-          alt={`Image from ${post.title}`}
-          height={designTokens.components.postCard.imageHeight}
-          borderRadius={designTokens.borderRadius.md}
-        />
+          {/* Title & Description */}
+          <Box sx={{ mb: designTokens.spacing.xs }}>
+            <Typography
+              component="span"
+              variant="body2"
+              sx={{
+                fontWeight: designTokens.typography.fontWeight.semibold,
+                mr: designTokens.spacing.xs,
+                color: designTokens.colors.textPrimary,
+              }}
+            >
+              {post.author}
+            </Typography>
+            <Typography
+              component="span"
+              variant="body2"
+              sx={{
+                color: designTokens.colors.textPrimary,
+                lineHeight: designTokens.typography.lineHeight.normal,
+              }}
+            >
+              {post.description}
+            </Typography>
+          </Box>
 
-        {/* Description */}
-        <Typography
-          variant="body2"
-          sx={{
-            mb: designTokens.spacing.lg,
-            color: designTokens.colors.textPrimary,
-            lineHeight: designTokens.typography.lineHeight.relaxed,
-          }}
-        >
-          {post.description}
-        </Typography>
+          {/* Category badge */}
+          {post.category && (
+            <Chip
+              label={post.category}
+              size="small"
+              sx={{
+                backgroundColor: designTokens.colors.overlayLight,
+                color: designTokens.colors.textSecondary,
+                fontWeight: designTokens.typography.fontWeight.medium,
+                fontSize: designTokens.typography.fontSize.xs,
+                height: '24px',
+                mb: designTokens.spacing.xs,
+              }}
+            />
+          )}
 
-        {/* Actions */}
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: designTokens.spacing.sm,
-            borderTop: `1px solid ${designTokens.colors.border}`,
-            pt: designTokens.spacing.md,
-          }}
-          role="group"
-          aria-label="Post interactions"
-        >
-          <LikeButton likeCount={post.likes?.length || 0} />
+          {/* Comments preview */}
+          {post.comments?.length > 0 && (
+            <Typography
+              variant="caption"
+              sx={{
+                color: designTokens.colors.textTertiary,
+                cursor: 'pointer',
+                display: 'block',
+                mb: designTokens.spacing.xs,
+                '&:hover': {
+                  color: designTokens.colors.textSecondary,
+                },
+              }}
+              onClick={() => setCommentDialogOpen(true)}
+            >
+              Voir les {post.comments.length} commentaire{post.comments.length > 1 ? 's' : ''}
+            </Typography>
+          )}
 
-          <IconButton
-            size="small"
-            onClick={() => setCommentDialogOpen(true)}
-            aria-label="Open comments"
-            title="Comments"
+          {/* Date */}
+          <Typography
+            variant="caption"
             sx={{
-              minWidth: '40px',
-              minHeight: '40px',
-              color: designTokens.colors.textSecondary,
-              '&:hover': {
-                color: designTokens.colors.primary,
-                backgroundColor: 'rgba(255, 107, 107, 0.1)',
-              },
-              '&:focus': {
-                outline: `2px solid ${designTokens.colors.primary}`,
-                outlineOffset: '2px',
-              },
+              color: designTokens.colors.textTertiary,
+              fontSize: '11px',
+              textTransform: 'uppercase',
+              letterSpacing: designTokens.typography.letterSpacing.wide,
             }}
           >
-            <CommentIcon fontSize="small" />
-          </IconButton>
-
-          <Typography variant="caption" sx={{ color: designTokens.colors.textTertiary, ml: 'auto' }}>
-            {post.comments?.length || 0} {t('comments.title', 'Comments')}
+            {new Date(post.date).toLocaleDateString('fr-FR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
           </Typography>
         </Box>
-      </SurfaceCard>
+      </Box>
 
       {/* Comment Dialog */}
       <Dialog open={commentDialogOpen} onClose={() => setCommentDialogOpen(false)} fullWidth maxWidth="sm">

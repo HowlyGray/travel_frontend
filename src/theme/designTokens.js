@@ -6,60 +6,70 @@
 
 export const designTokens = {
   // ============================================
-  // COLORS - Palette cohérente
+  // COLORS - Palette moderne et sophistiquée
   // ============================================
   colors: {
-    // Brand colors (Coral primary, Orange secondary)
-    primary: '#FF6B6B',      // Coral - Main brand color
-    primaryLight: '#FF8888', // Coral light (hover)
-    primaryDark: '#FF4444',  // Coral dark (pressed)
-    
-    secondary: '#FFA500',    // Orange - Secondary accent
-    secondaryLight: '#FFB84D',
-    secondaryDark: '#FF8C00',
-    
-    // Neutral colors (grayscale)
+    // Brand colors - Palette Instagram/Pinterest inspirée
+    primary: '#0A66C2',      // Bleu professionnel moderne
+    primaryLight: '#3B7DD6', // Bleu clair (hover)
+    primaryDark: '#004182',  // Bleu foncé (pressed)
+
+    secondary: '#E60023',    // Rouge Pinterest signature
+    secondaryLight: '#FF1744',
+    secondaryDark: '#BD081C',
+
+    accent: '#7C3AED',       // Violet moderne pour accents
+    accentLight: '#9F67FF',
+    accentDark: '#5B21B6',
+
+    // Neutral colors (grayscale premium)
     white: '#FFFFFF',
-    gray50: '#F9F9F9',
-    gray100: '#F3F3F3',
-    gray200: '#E8E8E8',
-    gray300: '#D1D1D1',
-    gray400: '#B0B0B0',
-    gray500: '#808080',
-    gray600: '#595959',
-    gray700: '#404040',
-    gray800: '#262626',
-    gray900: '#121212',
+    gray50: '#FAFAFA',       // Très léger
+    gray100: '#F5F5F5',      // Léger
+    gray200: '#EEEEEE',      // Background alt
+    gray300: '#E0E0E0',      // Bordures légères
+    gray400: '#BDBDBD',      // Icônes désactivées
+    gray500: '#9E9E9E',      // Texte secondaire
+    gray600: '#757575',      // Texte actif
+    gray700: '#616161',      // Texte important
+    gray800: '#424242',      // Presque noir
+    gray900: '#212121',      // Noir profond
     black: '#000000',
-    
+
     // Semantic colors
-    success: '#10B981',      // Green
-    successLight: '#34D399',
-    error: '#EF4444',        // Red
-    errorLight: '#F87171',
-    warning: '#F59E0B',      // Amber
-    info: '#3B82F6',         // Blue
-    
-    // Background colors
-    background: '#FFFFFF',
-    backgroundAlt: '#F9F9F9',
+    success: '#00C853',      // Vert moderne
+    successLight: '#69F0AE',
+    error: '#D32F2F',        // Rouge moderne
+    errorLight: '#EF5350',
+    warning: '#F57C00',      // Orange moderne
+    info: '#1976D2',         // Bleu info
+
+    // Background colors - Clean et moderne
+    background: '#FAFAFA',
+    backgroundAlt: '#FFFFFF',
     surface: '#FFFFFF',
-    surfaceElevated: '#F3F3F3',
-    
-    // Text colors
-    textPrimary: '#121212',
-    textSecondary: '#595959',
-    textTertiary: '#B0B0B0',
+    surfaceElevated: '#FFFFFF',
+
+    // Text colors - Hiérarchie claire
+    textPrimary: '#212121',
+    textSecondary: '#757575',
+    textTertiary: '#BDBDBD',
     textInverse: '#FFFFFF',
-    
-    // Border colors
-    border: '#E8E8E8',
-    borderLight: '#F3F3F3',
-    borderDark: '#D1D1D1',
-    
+
+    // Border colors - Subtils et élégants
+    border: '#EEEEEE',
+    borderLight: '#F5F5F5',
+    borderDark: '#E0E0E0',
+
     // Overlay & shadows
-    overlay: 'rgba(0, 0, 0, 0.5)',
-    overlayLight: 'rgba(0, 0, 0, 0.25)',
+    overlay: 'rgba(0, 0, 0, 0.6)',
+    overlayLight: 'rgba(0, 0, 0, 0.15)',
+    overlayMedium: 'rgba(0, 0, 0, 0.35)',
+
+    // Gradients modernes
+    gradientPrimary: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    gradientSecondary: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    gradientSunset: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
   },
 
   // ============================================
@@ -100,44 +110,53 @@ export const designTokens = {
   },
 
   // ============================================
-  // TYPOGRAPHY - Inter font, responsive scaling
+  // TYPOGRAPHY - Polices modernes et élégantes
   // ============================================
   typography: {
     fontFamily: {
-      primary: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-      code: '"Courier New", monospace',
+      primary: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
+      display: '"SF Pro Display", "Inter", -apple-system, sans-serif',
+      code: '"JetBrains Mono", "Courier New", monospace',
     },
-    
+
     fontSize: {
       // Responsive sizes using clamp(min, preferred, max)
-      xs: 'clamp(0.75rem, 2vw, 0.875rem)',      // 12-14px
-      sm: 'clamp(0.875rem, 2.5vw, 1rem)',       // 14-16px
-      base: 'clamp(1rem, 3vw, 1.125rem)',       // 16-18px
-      lg: 'clamp(1.125rem, 3.5vw, 1.25rem)',    // 18-20px
-      xl: 'clamp(1.25rem, 4vw, 1.5rem)',        // 20-24px
-      xxl: 'clamp(1.5rem, 5vw, 1.875rem)',      // 24-30px
-      xxxl: 'clamp(1.875rem, 6vw, 2.25rem)',    // 30-36px
+      xs: '0.75rem',        // 12px
+      sm: '0.875rem',       // 14px
+      base: '1rem',         // 16px
+      lg: '1.125rem',       // 18px
+      xl: '1.25rem',        // 20px
+      xxl: '1.5rem',        // 24px
+      xxxl: '2rem',         // 32px
+      display: '2.5rem',    // 40px
+      hero: '3.5rem',       // 56px
     },
-    
+
     fontWeight: {
+      thin: 200,
       light: 300,
       normal: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
+      extrabold: 800,
     },
-    
+
     lineHeight: {
       tight: 1.2,
+      snug: 1.375,
       normal: 1.5,
-      relaxed: 1.75,
+      relaxed: 1.625,
       loose: 2,
     },
-    
+
     letterSpacing: {
-      tight: '-0.02em',
+      tighter: '-0.05em',
+      tight: '-0.025em',
       normal: '0em',
-      wide: '0.04em',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em',
     },
   },
 
@@ -155,15 +174,21 @@ export const designTokens = {
   },
 
   // ============================================
-  // SHADOWS - Elevation levels
+  // SHADOWS - Elevation douce et moderne
   // ============================================
   shadows: {
     none: 'none',
-    xs: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    xs: '0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
+    md: '0 4px 12px 0 rgba(0, 0, 0, 0.08)',
+    lg: '0 8px 24px 0 rgba(0, 0, 0, 0.12)',
+    xl: '0 12px 32px 0 rgba(0, 0, 0, 0.16)',
+    xxl: '0 24px 48px 0 rgba(0, 0, 0, 0.20)',
+
+    // Ombres spéciales
+    card: '0 2px 8px 0 rgba(0, 0, 0, 0.06)',
+    cardHover: '0 8px 24px 0 rgba(0, 0, 0, 0.12)',
+    floating: '0 12px 40px 0 rgba(0, 0, 0, 0.15)',
   },
 
   // ============================================
@@ -209,55 +234,73 @@ export const designTokens = {
   },
 
   // ============================================
-  // COMPONENT SPECIFIC
+  // COMPONENT SPECIFIC - Design moderne
   // ============================================
   components: {
     button: {
       height: {
         xs: '32px',
         sm: '40px',
-        md: '48px',
-        lg: '56px',
+        md: '44px',
+        lg: '52px',
       },
       padding: {
-        xs: '0px 12px',
-        sm: '0px 16px',
+        xs: '0px 16px',
+        sm: '0px 20px',
         md: '0px 24px',
         lg: '0px 32px',
       },
-      borderRadius: '8px',
+      borderRadius: '12px',
       fontWeight: 600,
     },
-    
+
     input: {
       height: '48px',
-      padding: '12px 16px',
-      borderRadius: '8px',
+      padding: '14px 16px',
+      borderRadius: '12px',
       borderWidth: '1px',
       fontWeight: 400,
     },
-    
+
     card: {
-      padding: '16px',
-      borderRadius: '12px',
-      shadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+      padding: '0px',
+      borderRadius: '16px',
+      shadow: '0 2px 8px 0 rgba(0, 0, 0, 0.06)',
     },
-    
+
     postCard: {
-      padding: '16px',
-      borderRadius: '12px',
-      shadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-      imageHeight: '300px',
+      padding: '0px',
+      borderRadius: '16px',
+      shadow: '0 2px 8px 0 rgba(0, 0, 0, 0.06)',
+      imageHeight: 'auto',
+      contentPadding: '16px',
     },
-    
+
     bottomNav: {
-      height: '64px',
-      gap: '4px',
+      height: '60px',
+      gap: '0px',
+      borderTop: '1px solid',
     },
-    
+
     header: {
-      height: '56px',
-      padding: '8px 16px',
+      height: '60px',
+      padding: '12px 20px',
+      borderBottom: '1px solid',
+    },
+
+    avatar: {
+      xs: '32px',
+      sm: '40px',
+      md: '48px',
+      lg: '64px',
+      xl: '96px',
+    },
+
+    badge: {
+      borderRadius: '6px',
+      padding: '4px 8px',
+      fontSize: '0.75rem',
+      fontWeight: 600,
     },
   },
 };

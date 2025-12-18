@@ -1,16 +1,16 @@
 /**
- * BottomNavigation.js - Main navigation
- * 5 main tabs: Feed, Discover, Create, Activity, Profile
+ * BottomNavigation.js - Navigation moderne et épurée
+ * Style Instagram/Pinterest avec animations fluides
  */
 
 import React from 'react';
-import { Box, Paper, IconButton, Tooltip } from '@mui/material';
+import { Box, Paper, IconButton, Typography } from '@mui/material';
 import {
   Home as HomeIcon,
-  Search as DiscoverIcon,
-  Add as CreateIcon,
-  Favorite as ActivityIcon,
-  Person as ProfileIcon,
+  Explore as ExploreIcon,
+  AddCircleOutline as CreateIcon,
+  FavoriteBorder as ActivityIcon,
+  PersonOutline as ProfileIcon,
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { designTokens } from '../theme/designTokens';
@@ -19,11 +19,11 @@ const BottomNav = ({ currentView, onNavigate }) => {
   const { t } = useTranslation();
 
   const navItems = [
-    { id: 'feed', label: t('nav.feed', 'Feed'), icon: HomeIcon },
-    { id: 'discover', label: t('nav.discover', 'Discover'), icon: DiscoverIcon },
-    { id: 'create', label: t('nav.create', 'Create'), icon: CreateIcon },
-    { id: 'activity', label: t('nav.activity', 'Activity'), icon: ActivityIcon },
-    { id: 'profile', label: t('nav.profile', 'Profile'), icon: ProfileIcon },
+    { id: 'feed', label: t('nav.feed', 'Accueil'), icon: HomeIcon },
+    { id: 'discover', label: t('nav.discover', 'Découvrir'), icon: ExploreIcon },
+    { id: 'create', label: t('nav.create', 'Créer'), icon: CreateIcon },
+    { id: 'activity', label: t('nav.activity', 'Activité'), icon: ActivityIcon },
+    { id: 'profile', label: t('nav.profile', 'Profil'), icon: ProfileIcon },
   ];
 
   return (
@@ -37,12 +37,13 @@ const BottomNav = ({ currentView, onNavigate }) => {
         left: 0,
         right: 0,
         height: designTokens.components.bottomNav.height,
-        backgroundColor: designTokens.colors.background,
+        backgroundColor: designTokens.colors.backgroundAlt,
         borderTop: `1px solid ${designTokens.colors.border}`,
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
         zIndex: designTokens.zIndex.fixed,
+        backdropFilter: 'blur(10px)',
       }}
     >
       {navItems.map((item) => {
@@ -50,46 +51,69 @@ const BottomNav = ({ currentView, onNavigate }) => {
         const isActive = currentView === item.id;
 
         return (
-          <Tooltip key={item.id} title={item.label} placement="top">
+          <Box
+            key={item.id}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: 1,
+            }}
+          >
             <IconButton
               onClick={() => onNavigate(item.id)}
               aria-current={isActive ? 'page' : undefined}
               aria-label={item.label}
               sx={{
-                minWidth: '44px',
-                minHeight: '44px',
+                minWidth: '48px',
+                minHeight: '48px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: isActive ? designTokens.colors.primary : designTokens.colors.textSecondary,
-                transition: designTokens.transitions.fast,
+                transition: designTokens.transitions.base,
                 '&:hover': {
                   color: designTokens.colors.primary,
-                  backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                },
-                '&:focus': {
-                  outline: `2px solid ${designTokens.colors.primary}`,
-                  outlineOffset: '2px',
+                  backgroundColor: designTokens.colors.overlayLight,
+                  transform: 'scale(1.05)',
                 },
                 position: 'relative',
               }}
             >
-              <Icon sx={{ fontSize: '24px' }} />
+              <Icon
+                sx={{
+                  fontSize: item.id === 'create' ? '32px' : '26px',
+                  fontWeight: isActive ? 'bold' : 'normal',
+                }}
+              />
               {isActive && (
                 <Box
                   sx={{
                     position: 'absolute',
-                    bottom: '4px',
-                    width: '4px',
-                    height: '4px',
-                    borderRadius: '50%',
+                    top: 0,
+                    width: '32px',
+                    height: '3px',
+                    borderRadius: '0 0 3px 3px',
                     backgroundColor: designTokens.colors.primary,
                   }}
                 />
               )}
             </IconButton>
-          </Tooltip>
+            <Typography
+              variant="caption"
+              sx={{
+                fontSize: '10px',
+                fontWeight: isActive ? designTokens.typography.fontWeight.semibold : designTokens.typography.fontWeight.normal,
+                color: isActive ? designTokens.colors.primary : designTokens.colors.textTertiary,
+                mt: '-4px',
+                transition: designTokens.transitions.fast,
+              }}
+            >
+              {item.label}
+            </Typography>
+          </Box>
         );
       })}
     </Paper>
