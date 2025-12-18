@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "✈️ Descubrimientos de Viaje",
+    "subtitle": "Comparte y descubre experiencias de viaje increíbles alrededor del mundo",
+    "welcome": "Bienvenido",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "profile": "Perfil",
+    "back": "Atrás"
+  },
+  "nav": {
+    "backToHome": "Volver al inicio",
+    "home": "Inicio",
+    "feed": "Muro",
+    "discover": "Descubrir",
+    "create": "Crear",
+    "activity": "Actividad",
+    "profile": "Perfil"
+  },
+  "form": {
+    "title": "Agregar un nuevo descubrimiento",
+    "titleField": "Título",
+    "descriptionField": "Descripción",
+    "locationField": "Ubicación",
+    "dateField": "Fecha",
+    "categoryField": "Categoría",
+    "publish": "Publicar descubrimiento"
+  },
+  "categories": {
+    "all": "Todas",
+    "adventure": "Aventura",
+    "food": "Comida",
+    "culture": "Cultura",
+    "relaxation": "Relajación"
+  },
+  "filter": {
+    "title": "Filtros",
+    "category": "Categoría",
+    "sort": "Ordenar por",
+    "newest": "Más reciente",
+    "oldest": "Más antiguo",
+    "popular": "Popular",
+    "dateRange": "Rango de fechas",
+    "location": "Ubicación",
+    "search": "Buscar"
+  },
+  "upload": {
+    "title": "Imágenes",
+    "addImage": "Agregar imagen",
+    "addMultiple": "Agregar múltiples imágenes",
+    "maxImages": "Imágenes (máx 5)",
+    "deleteAll": "Eliminar todas las imágenes",
+    "moreImages": "+{{count}} imágenes",
+    "fileSizeError": "Archivo {{name}} demasiado grande (máx 5MB)",
+    "fileTypeError": "Archivo {{name}} no es una imagen"
+  },
+  "post": {
+    "location": "📍",
+    "seeMore": "Ver más",
+    "seeLess": "Ver menos",
+    "noPosts": "No se encontraron publicaciones"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "noAccount": "¿No tienes cuenta?",
+    "signUp": "Registrarse"
+  },
+  "profile": {
+    "title": "Perfil",
+    "myPosts": "Mis publicaciones",
+    "editProfile": "Editar perfil",
+    "settings": "Configuración"
+  },
+  "language": {
+    "title": "Idioma",
+    "french": "Français",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch"
+  },
+  "share": {
+    "title": "Compartir",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "¡Enlace copiado!",
+    "facebook": "Facebook",
+    "twitter": "Twitter", 
+    "linkedin": "LinkedIn",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "reddit": "Reddit",
+    "pinterest": "Pinterest",
+    "telegram": "Telegram",
+    "messages": {
+      "facebook": "Mira esta aventura: \"{{title}}\" en {{location}}",
+      "twitter": "{{title}} 📍 {{location}} #Viajes #{{category}}",
+      "linkedin": "Descubrimiento de viaje: {{title}}\n\n{{description}}\n\n#Viajes #Turismo",
+      "whatsapp": "Mira esta increíble experiencia: \"{{title}}\" en {{location}}",
+      "reddit": "Mira esta aventura: \"{{title}}\" en {{location}} #Viajes #{{category}}",
+      "pinterest": "{{title}} - {{description}} #Viajes #{{category}}",
+      "telegram": "📍 {{title}} en {{location}} #Viajes #{{category}}",
+      "email": "Descubrimiento de viaje para compartir",
+      "emailSubject": "Descubrimiento de viaje: {{title}}"
+    }
+  },
+  "analytics": {
+    "title": "Analíticas de Compartir Social",
+    "totalShares": "Total de Compartidos",
+    "platforms": "Plataformas",
+    "mostPopular": "Más Popular",
+    "clear": "Limpiar",
+    "charts": "Gráficos",
+    "recent": "Actividad Reciente",
+    "details": "Detalles",
+    "byPlatform": "Compartidos por Plataforma",
+    "distribution": "Distribución por Plataforma",
+    "recentShares": "Compartidos Recientes",
+    "timestamp": "Hora",
+    "platform": "Plataforma",
+    "post": "Publicación",
+    "shares": "Total de Compartidos",
+    "allStats": "Todas las Estadísticas",
+    "firstShare": "Primer Compartido",
+    "lastShare": "Último Compartido",
+    "noData": "Aún no hay actividad de compartir. ¡Comienza a compartir publicaciones para ver las analíticas!"
+  },
+  "comments": {
+    "title": "Comentarios",
+    "placeholder": "Escribe un comentario...",
+    "close": "Cerrar",
+    "noComments": "¡Sé el primero en comentar!",
+    "like": "Me gusta",
+    "comment": "Comentar"
+  },
+  "common": {
+    "send": "Enviar",
+    "cancel": "Cancelar",
+    "logout": "Cerrar sesión"
+  }
+}

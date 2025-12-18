@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "✈️ Reise-Entdeckungen",
+    "subtitle": "Teilen und entdecken Sie erstaunliche Reiseerfahrungen auf der ganzen Welt",
+    "welcome": "Willkommen",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "profile": "Profil",
+    "back": "Zurück"
+  },
+  "nav": {
+    "backToHome": "Zurück zur Startseite",
+    "home": "Startseite",
+    "feed": "Feed",
+    "discover": "Entdecken",
+    "create": "Erstellen",
+    "activity": "Aktivität",
+    "profile": "Profil"
+  },
+  "form": {
+    "title": "Neue Entdeckung hinzufügen",
+    "titleField": "Titel",
+    "descriptionField": "Beschreibung",
+    "locationField": "Ort",
+    "dateField": "Datum",
+    "categoryField": "Kategorie",
+    "publish": "Entdeckung veröffentlichen"
+  },
+  "categories": {
+    "all": "Alle",
+    "adventure": "Abenteuer",
+    "food": "Essen",
+    "culture": "Kultur",
+    "relaxation": "Entspannung"
+  },
+  "filter": {
+    "title": "Filter",
+    "category": "Kategorie",
+    "sort": "Sortieren nach",
+    "newest": "Neueste",
+    "oldest": "Älteste",
+    "popular": "Beliebt",
+    "dateRange": "Datumsbereich",
+    "location": "Ort",
+    "search": "Suchen"
+  },
+  "upload": {
+    "title": "Bilder",
+    "addImage": "Bild hinzufügen",
+    "addMultiple": "Mehrere Bilder hinzufügen",
+    "maxImages": "Bilder (max 5)",
+    "deleteAll": "Alle Bilder löschen",
+    "moreImages": "+{{count}} Bilder",
+    "fileSizeError": "Datei {{name}} zu groß (max 5MB)",
+    "fileTypeError": "Datei {{name}} ist kein Bild"
+  },
+  "post": {
+    "location": "📍",
+    "seeMore": "Mehr sehen",
+    "seeLess": "Weniger sehen",
+    "noPosts": "Keine Beiträge gefunden"
+  },
+  "login": {
+    "title": "Anmelden",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "noAccount": "Kein Konto?",
+    "signUp": "Registrieren"
+  },
+  "profile": {
+    "title": "Profil",
+    "myPosts": "Meine Beiträge",
+    "editProfile": "Profil bearbeiten",
+    "settings": "Einstellungen"
+  },
+  "language": {
+    "title": "Sprache",
+    "french": "Français",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch"
+  },
+  "share": {
+    "title": "Teilen",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link kopiert!",
+    "facebook": "Facebook",
+    "twitter": "Twitter", 
+    "linkedin": "LinkedIn",
+    "whatsapp": "WhatsApp",
+    "email": "E-Mail",
+    "reddit": "Reddit",
+    "pinterest": "Pinterest",
+    "telegram": "Telegram",
+    "messages": {
+      "facebook": "Entdecke dieses Abenteuer: \"{{title}}\" in {{location}}",
+      "twitter": "{{title}} 📍 {{location}} #Reisen #{{category}}",
+      "linkedin": "Reise-Entdeckung: {{title}}\n\n{{description}}\n\n#Reisen #Tourismus",
+      "whatsapp": "Sieh dir diese tolle Erfahrung an: \"{{title}}\" in {{location}}",
+      "reddit": "Entdecke dieses Abenteuer: \"{{title}}\" in {{location}} #Reisen #{{category}}",
+      "pinterest": "{{title}} - {{description}} #Reisen #{{category}}",
+      "telegram": "📍 {{title}} in {{location}} #Reisen #{{category}}",
+      "email": "Reise-Entdeckung zum Teilen",
+      "emailSubject": "Reise-Entdeckung: {{title}}"
+    }
+  },
+  "analytics": {
+    "title": "Social-Media-Analysen",
+    "totalShares": "Gesamte Geteilt",
+    "platforms": "Plattformen",
+    "mostPopular": "Beliebteste",
+    "clear": "Löschen",
+    "charts": "Diagramme",
+    "recent": "Aktuelle Aktivität",
+    "details": "Details",
+    "byPlatform": "Geteilt nach Plattform",
+    "distribution": "Plattform-Verteilung",
+    "recentShares": "Kürzlich Geteilt",
+    "timestamp": "Zeit",
+    "platform": "Plattform",
+    "post": "Beitrag",
+    "shares": "Gesamte Geteilt",
+    "allStats": "Alle Statistiken",
+    "firstShare": "Erstes Teilen",
+    "lastShare": "Letztes Teilen",
+    "noData": "Noch keine Teilaktivität. Beginnen Sie zu teilen, um Analysen zu sehen!"
+  },
+  "comments": {
+    "title": "Kommentare",
+    "placeholder": "Schreib einen Kommentar...",
+    "close": "Schließen",
+    "noComments": "Sei der Erste, der kommentiert!",
+    "like": "Gefällt mir",
+    "comment": "Kommentieren"
+  },
+  "common": {
+    "send": "Senden",
+    "cancel": "Abbrechen",
+    "logout": "Abmelden"
+  }
+}

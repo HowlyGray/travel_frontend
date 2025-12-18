@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "✈️ Travel Discoveries",
+    "subtitle": "Share and discover amazing travel experiences around the world",
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "back": "Back"
+  },
+  "nav": {
+    "backToHome": "Back to Home",
+    "home": "Home",
+    "feed": "Feed",
+    "discover": "Discover",
+    "create": "Create",
+    "activity": "Activity",
+    "profile": "Profile"
+  },
+  "form": {
+    "title": "Add a new discovery",
+    "titleField": "Title",
+    "descriptionField": "Description",
+    "locationField": "Location",
+    "dateField": "Date",
+    "categoryField": "Category",
+    "publish": "Publish discovery"
+  },
+  "categories": {
+    "all": "All",
+    "adventure": "Adventure",
+    "food": "Food",
+    "culture": "Culture",
+    "relaxation": "Relaxation"
+  },
+  "filter": {
+    "title": "Filters",
+    "category": "Category",
+    "sort": "Sort by",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "popular": "Popular",
+    "dateRange": "Date range",
+    "location": "Location",
+    "search": "Search"
+  },
+  "upload": {
+    "title": "Images",
+    "addImage": "Add image",
+    "addMultiple": "Add multiple images",
+    "maxImages": "Images (max 5)",
+    "deleteAll": "Delete all images",
+    "moreImages": "+{{count}} images",
+    "fileSizeError": "File {{name}} too large (max 5MB)",
+    "fileTypeError": "File {{name}} is not an image"
+  },
+  "post": {
+    "location": "📍",
+    "seeMore": "See more",
+    "seeLess": "See less",
+    "noPosts": "No posts found"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "noAccount": "No account?",
+    "signUp": "Sign up"
+  },
+  "profile": {
+    "title": "Profile",
+    "myPosts": "My posts",
+    "editProfile": "Edit profile",
+    "settings": "Settings"
+  },
+  "language": {
+    "title": "Language",
+    "french": "Français",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch"
+  },
+  "share": {
+    "title": "Share",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "facebook": "Facebook",
+    "twitter": "Twitter", 
+    "linkedin": "LinkedIn",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "reddit": "Reddit",
+    "pinterest": "Pinterest",
+    "telegram": "Telegram",
+    "messages": {
+      "facebook": "Check out this adventure: \"{{title}}\" in {{location}}",
+      "twitter": "{{title}} 📍 {{location}} #Travel #{{category}}",
+      "linkedin": "Travel discovery: {{title}}\n\n{{description}}\n\n#Travel #Tourism",
+      "whatsapp": "Check out this amazing experience: \"{{title}}\" in {{location}}",
+      "reddit": "Check out this adventure: \"{{title}}\" in {{location}} #Travel #{{category}}",
+      "pinterest": "{{title}} - {{description}} #Travel #{{category}}",
+      "telegram": "📍 {{title}} in {{location}} #Travel #{{category}}",
+      "email": "Travel discovery to share",
+      "emailSubject": "Travel discovery: {{title}}"
+    }
+  },
+  "analytics": {
+    "title": "Social Sharing Analytics",
+    "totalShares": "Total Shares",
+    "platforms": "Platforms",
+    "mostPopular": "Most Popular",
+    "clear": "Clear",
+    "charts": "Charts",
+    "recent": "Recent Activity",
+    "details": "Details",
+    "byPlatform": "Shares by Platform",
+    "distribution": "Platform Distribution",
+    "recentShares": "Recent Shares",
+    "timestamp": "Time",
+    "platform": "Platform",
+    "post": "Post",
+    "shares": "Total Shares",
+    "allStats": "All Statistics",
+    "firstShare": "First Share",
+    "lastShare": "Last Share",
+    "noData": "No sharing activity yet. Start sharing posts to see analytics!"
+  },
+  "comments": {
+    "title": "Comments",
+    "placeholder": "Write a comment...",
+    "close": "Close",
+    "noComments": "Be the first to comment!",
+    "like": "Like",
+    "comment": "Comment"
+  },
+  "common": {
+    "send": "Send",
+    "cancel": "Cancel",
+    "logout": "Logout"
+  }
+}

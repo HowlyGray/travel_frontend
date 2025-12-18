@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "✈️ Découvertes de Voyage",
+    "subtitle": "Partagez et découvrez des expériences de voyage incroyables à travers le monde",
+    "welcome": "Bienvenue",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "back": "Retour"
+  },
+  "nav": {
+    "backToHome": "Retour à l'accueil",
+    "home": "Accueil",
+    "feed": "Flux",
+    "discover": "Découvrir",
+    "create": "Créer",
+    "activity": "Activité",
+    "profile": "Profil"
+  },
+  "form": {
+    "title": "Ajouter une nouvelle découverte",
+    "titleField": "Titre",
+    "descriptionField": "Description",
+    "locationField": "Lieu",
+    "dateField": "Date",
+    "categoryField": "Catégorie",
+    "publish": "Publier la découverte"
+  },
+  "categories": {
+    "all": "Toutes",
+    "adventure": "Aventure",
+    "food": "Nourriture",
+    "culture": "Culture",
+    "relaxation": "Relaxation"
+  },
+  "filter": {
+    "title": "Filtres",
+    "category": "Catégorie",
+    "sort": "Trier par",
+    "newest": "Plus récent",
+    "oldest": "Plus ancient",
+    "popular": "Populaire",
+    "dateRange": "Plage de dates",
+    "location": "Lieu",
+    "search": "Rechercher"
+  },
+  "upload": {
+    "title": "Images",
+    "addImage": "Ajouter une image",
+    "addMultiple": "Ajouter plusieurs images",
+    "maxImages": "Images (max 5)",
+    "deleteAll": "Supprimer toutes les images",
+    "moreImages": "+{{count}} images",
+    "fileSizeError": "Fichier {{name}} trop volumineux (max 5MB)",
+    "fileTypeError": "Fichier {{name}} n'est pas une image"
+  },
+  "post": {
+    "location": "📍",
+    "seeMore": "Voir plus",
+    "seeLess": "Voir moins",
+    "noPosts": "Aucune publication trouvée"
+  },
+  "login": {
+    "title": "Connexion",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "noAccount": "Pas de compte ?",
+    "signUp": "S'inscrire"
+  },
+  "profile": {
+    "title": "Profil",
+    "myPosts": "Mes publications",
+    "editProfile": "Modifier le profil",
+    "settings": "Paramètres"
+  },
+  "language": {
+    "title": "Langue",
+    "french": "Français",
+    "english": "English",
+    "spanish": "Español",
+    "german": "Deutsch"
+  },
+  "share": {
+    "title": "Partager",
+    "copyLink": "Copier le lien",
+    "linkCopied": "Lien copié !",
+    "facebook": "Facebook",
+    "twitter": "Twitter", 
+    "linkedin": "LinkedIn",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "reddit": "Reddit",
+    "pinterest": "Pinterest",
+    "telegram": "Telegram",
+    "messages": {
+      "facebook": "Découvrez cette aventure : \"{{title}}\" à {{location}}",
+      "twitter": "{{title}} 📍 {{location}} #Travel #{{category}}",
+      "linkedin": "Découverte voyage : {{title}}\n\n{{description}}\n\n#Travel #Tourism",
+      "whatsapp": "Regarde cette superbe expérience : \"{{title}}\" à {{location}}",
+      "reddit": "Découvrez cette aventure : \"{{title}}\" à {{location}} #Travel #{{category}}",
+      "pinterest": "{{title}} - {{description}} #Travel #{{category}}",
+      "telegram": "📍 {{title}} à {{location}} #Travel #{{category}}",
+      "email": "Découverte de voyage à partager",
+      "emailSubject": "Découverte de voyage : {{title}}"
+    }
+  },
+  "analytics": {
+    "title": "Analytiques de Partage Social",
+    "totalShares": "Total des Partages",
+    "platforms": "Plateformes",
+    "mostPopular": "Plus Populaire",
+    "clear": "Effacer",
+    "charts": "Graphiques",
+    "recent": "Activité Récente",
+    "details": "Détails",
+    "byPlatform": "Partages par Plateforme",
+    "distribution": "Distribution par Plateforme",
+    "recentShares": "Partages Récents",
+    "timestamp": "Heure",
+    "platform": "Plateforme",
+    "post": "Publication",
+    "shares": "Total des Partages",
+    "allStats": "Toutes les Statistiques",
+    "firstShare": "Premier Partage",
+    "lastShare": "Dernier Partage",
+    "noData": "Aucune activité de partage pour l'instant. Commencez à partager des publications pour voir les analytiques !"
+  },
+  "comments": {
+    "title": "Commentaires",
+    "placeholder": "Écrivez un commentaire...",
+    "close": "Fermer",
+    "noComments": "Soyez le premier à commenter!",
+    "like": "Aimer",
+    "comment": "Commenter"
+  },
+  "common": {
+    "send": "Envoyer",
+    "cancel": "Annuler",
+    "logout": "Déconnexion"
+  }
+}
