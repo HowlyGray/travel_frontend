@@ -28,31 +28,37 @@ import ShareButton from './ShareButton';
 import LikeButton from './LikeButton';
 import LazyImage from './LazyImage';
 import { designTokens } from '../theme/designTokens';
+import { useInteractions } from '../context/InteractionsContext';
 
 const PostCard = ({ post, onUpdate }) => {
   const { t } = useTranslation();
   const [commentDialogOpen, setCommentDialogOpen] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [currentImageIndex] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
+
+  const {
+    toggleBookmark,
+    isBookmarked,
+    addComment,
+    getComments,
+    getCommentCount,
+  } = useInteractions();
 
   const handleAddComment = () => {
     if (newComment.trim()) {
-      const updatedPost = {
-        ...post,
-        comments: [
-          ...post.comments,
-          {
-            author: 'Current User',
-            content: newComment,
-            date: new Date().toISOString(),
-          },
-        ],
+      const comment = {
+        author: 'Current User',
+        content: newComment,
+        date: new Date().toISOString(),
       };
-      if (onUpdate) onUpdate(updatedPost);
+      addComment(post.id, comment);
       setNewComment('');
       setCommentDialogOpen(false);
     }
+  };
+
+  const handleToggleBookmark = () => {
+    toggleBookmark(post.id);
   };
 
   const images = post.images || [];
@@ -207,7 +213,7 @@ const PostCard = ({ post, onUpdate }) => {
             aria-label="Post interactions"
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <LikeButton likeCount={post.likes?.length || 0} />
+              <LikeButton postId={post.id} />
 
               <IconButton
                 size="medium"
@@ -228,8 +234,8 @@ const PostCard = ({ post, onUpdate }) => {
 
             <IconButton
               size="medium"
-              onClick={() => setIsSaved(!isSaved)}
-              aria-label={isSaved ? 'Unsave' : 'Save'}
+              onClick={handleToggleBookmark}
+              aria-label={isBookmarked(post.id) ? 'Unsave' : 'Save'}
               sx={{
                 color: designTokens.colors.textPrimary,
                 '&:hover': {
@@ -237,7 +243,7 @@ const PostCard = ({ post, onUpdate }) => {
                 },
               }}
             >
-              {isSaved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+              {isBookmarked(post.id) ? <BookmarkIcon /> : <BookmarkBorderIcon />}
             </IconButton>
           </Box>
 
@@ -295,7 +301,7 @@ const PostCard = ({ post, onUpdate }) => {
           )}
 
           {/* Comments preview */}
-          {post.comments?.length > 0 && (
+          {getCommentCount(post.id) > 0 && (
             <Typography
               variant="caption"
               sx={{
@@ -309,7 +315,7 @@ const PostCard = ({ post, onUpdate }) => {
               }}
               onClick={() => setCommentDialogOpen(true)}
             >
-              Voir les {post.comments.length} commentaire{post.comments.length > 1 ? 's' : ''}
+              Voir les {getCommentCount(post.id)} commentaire{getCommentCount(post.id) > 1 ? 's' : ''}
             </Typography>
           )}
 
@@ -340,8 +346,8 @@ const PostCard = ({ post, onUpdate }) => {
         <DialogContent>
           {/* Existing comments */}
           <Box sx={{ mb: designTokens.spacing.lg, maxHeight: '200px', overflowY: 'auto' }}>
-            {post.comments && post.comments.length > 0 ? (
-              post.comments.map((comment, idx) => (
+            {getComments(post.id).length > 0 ? (
+              getComments(post.id).map((comment, idx) => (
                 <Box key={idx} sx={{ mb: designTokens.spacing.md }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: designTokens.typography.fontWeight.semibold }}>
                     {comment.author}
@@ -356,7 +362,7 @@ const PostCard = ({ post, onUpdate }) => {
               ))
             ) : (
               <Typography variant="body2" sx={{ color: designTokens.colors.textTertiary }}>
-                {t('comments.noComments', 'Be the first to comment!')}
+                {t('comments.noComments', 'Soyez le premier à commenter!')}
               </Typography>
             )}
           </Box>

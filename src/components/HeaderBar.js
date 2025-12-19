@@ -17,7 +17,7 @@ import LanguageSelector from './LanguageSelector';
 import { useTheme } from '../context/ThemeContext';
 import { designTokens } from '../theme/designTokens';
 
-const HeaderBar = ({ currentUser, onLogout, onProfileClick }) => {
+const HeaderBar = ({ currentUser, onLogout, onProfileClick, onSearch, searchQuery }) => {
   const { t } = useTranslation();
   const { mode, toggleMode } = useTheme();
 
@@ -82,6 +82,8 @@ const HeaderBar = ({ currentUser, onLogout, onProfileClick }) => {
           <SearchIcon sx={{ color: designTokens.colors.textTertiary, mr: 1, fontSize: '20px' }} />
           <InputBase
             placeholder={t('search.placeholder', 'Rechercher des lieux...')}
+            value={searchQuery || ''}
+            onChange={(e) => onSearch && onSearch(e.target.value)}
             sx={{
               flex: 1,
               fontSize: designTokens.typography.fontSize.sm,

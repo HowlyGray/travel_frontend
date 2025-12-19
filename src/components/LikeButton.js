@@ -7,19 +7,15 @@ import { IconButton, Box, Typography } from '@mui/material';
 import { Favorite as LikeFilledIcon, FavoriteBorder as LikeEmptyIcon } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { designTokens } from '../theme/designTokens';
+import { useInteractions } from '../context/InteractionsContext';
 
-const LikeButton = ({ liked = false, likeCount = 0, onLike, small = false }) => {
-  const [isLiked, setIsLiked] = useState(liked);
-  const [count, setCount] = useState(likeCount);
+const LikeButton = ({ postId, small = false }) => {
   const [animate, setAnimate] = useState(false);
+  const { toggleLike, isLiked } = useInteractions();
 
   const handleClick = () => {
     setAnimate(true);
-    setIsLiked(!isLiked);
-    setCount(isLiked ? count - 1 : count + 1);
-    if (onLike) {
-      onLike(!isLiked);
-    }
+    toggleLike(postId);
     setTimeout(() => setAnimate(false), 300);
   };
 
@@ -41,13 +37,13 @@ const LikeButton = ({ liked = false, likeCount = 0, onLike, small = false }) => 
         <IconButton
           size={small ? 'small' : 'medium'}
           onClick={handleClick}
-          aria-label={isLiked ? 'Unlike post' : 'Like post'}
-          aria-pressed={isLiked}
-          title={isLiked ? 'Unlike' : 'Like'}
+          aria-label={isLiked(postId) ? 'Unlike post' : 'Like post'}
+          aria-pressed={isLiked(postId)}
+          title={isLiked(postId) ? 'Unlike' : 'Like'}
           sx={{
             minWidth: buttonSize,
             minHeight: buttonSize,
-            color: isLiked ? designTokens.colors.error : designTokens.colors.textSecondary,
+            color: isLiked(postId) ? designTokens.colors.error : designTokens.colors.textSecondary,
             transition: designTokens.transitions.fast,
             '&:hover': {
               color: designTokens.colors.error,
@@ -58,25 +54,13 @@ const LikeButton = ({ liked = false, likeCount = 0, onLike, small = false }) => 
             },
           }}
         >
-          {isLiked ? (
+          {isLiked(postId) ? (
             <LikeFilledIcon sx={{ fontSize: size }} />
           ) : (
             <LikeEmptyIcon sx={{ fontSize: size }} />
           )}
         </IconButton>
       </motion.div>
-
-      {count > 0 && !small && (
-        <Typography
-          variant="caption"
-          sx={{
-            color: designTokens.colors.textSecondary,
-            fontWeight: designTokens.typography.fontWeight.medium,
-          }}
-        >
-          {count}
-        </Typography>
-      )}
     </Box>
   );
 };
