@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import PageTransition from './components/PageTransition';
 import HeroSection from './components/HeroSection';
 import { useTheme } from './context/ThemeContext';
+import { InteractionsProvider } from './context/InteractionsContext';
 import { designTokens } from './theme/designTokens';
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
   const [posts, setPosts] = useState(mockPosts);
   const [filteredPosts, setFilteredPosts] = useState(mockPosts);
   const [isClient, setIsClient] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('Newest');
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [locationFilter, setLocationFilter] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,6 +101,49 @@ function App() {
     setCurrentView(view);
   };
 
+  // Filtrage et tri automatiques
+  useEffect(() => {
+    let filtered = [...posts];
+
+    // Filtrage par catégorie
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter((post) => post.category === selectedCategory);
+    }
+
+    // Filtrage par recherche
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((post) =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.location.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filtrage par localisation
+    if (locationFilter.trim()) {
+      filtered = filtered.filter((post) =>
+        post.location.toLowerCase().includes(locationFilter.toLowerCase())
+      );
+    }
+
+    // Filtrage par date
+    if (dateRange[0] && dateRange[1]) {
+      filtered = filtered.filter((post) => {
+        const postDate = new Date(post.date);
+        return postDate >= dateRange[0] && postDate <= dateRange[1];
+      });
+    }
+
+    // Tri
+    if (sortBy === 'Newest') {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (sortBy === 'Oldest') {
+      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    setFilteredPosts(filtered);
+  }, [posts, selectedCategory, searchQuery, sortBy, dateRange, locationFilter]);
+
   const handleSubmitPost = (formData) => {
     const newPost = {
       ...formData,
@@ -104,35 +153,48 @@ function App() {
       likes: [],
       comments: [],
     };
-    const updatedPosts = [...posts, newPost];
-    setPosts(updatedPosts);
-    setFilteredPosts(updatedPosts);
+    setPosts([...posts, newPost]);
   };
 
   const handleFilterChange = (category) => {
-    if (category === 'All') {
-      setFilteredPosts(posts);
-    } else {
-      setFilteredPosts(posts.filter((post) => post.category === category));
-    }
+    setSelectedCategory(category);
+  };
+
+  const handleSortChange = (sort) => {
+    setSortBy(sort);
+  };
+
+  const handleDateRangeChange = (range) => {
+    setDateRange(range);
+  };
+
+  const handleLocationFilter = (location) => {
+    setLocationFilter(location);
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
-    setCurrentView('feed');
+    setCurrentView('discover');
   };
 
   return (
     <ErrorBoundary>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <InteractionsProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
 
-        {/* Header */}
-        <HeaderBar
-          currentUser={currentUser}
-          onLogout={handleLogout}
-          onProfileClick={() => setCurrentView('profile')}
-        />
+          {/* Header */}
+          <HeaderBar
+            currentUser={currentUser}
+            onLogout={handleLogout}
+            onProfileClick={() => setCurrentView('profile')}
+            onSearch={handleSearch}
+            searchQuery={searchQuery}
+          />
 
         {/* Main Content */}
         <Box
@@ -152,9 +214,15 @@ function App() {
                 {/* Featured Content */}
                 <Container maxWidth="lg" sx={{ py: designTokens.spacing.xxl }}>
                   <Box sx={{ mb: designTokens.spacing.lg }}>
-                    <FilterBar categories={categories} onFilterChange={handleFilterChange} />
+                    <FilterBar
+                      categories={categories}
+                      onFilterChange={handleFilterChange}
+                      onSortChange={handleSortChange}
+                      onDateRangeChange={handleDateRangeChange}
+                      onLocationFilter={handleLocationFilter}
+                    />
                   </Box>
-                  <PostList posts={filteredPosts} defaultView="grid" />
+                  <PostList posts={filteredPosts} onUpdatePosts={setPosts} defaultView="grid" />
                 </Container>
               </Box>
             </PageTransition>
@@ -171,7 +239,13 @@ function App() {
 
                 {/* Filters */}
                 <Box sx={{ mb: designTokens.spacing.lg }}>
-                  <FilterBar categories={categories} onFilterChange={handleFilterChange} />
+                  <FilterBar
+                    categories={categories}
+                    onFilterChange={handleFilterChange}
+                    onSortChange={handleSortChange}
+                    onDateRangeChange={handleDateRangeChange}
+                    onLocationFilter={handleLocationFilter}
+                  />
                 </Box>
 
                 {/* Posts List */}
@@ -201,9 +275,10 @@ function App() {
           )}
         </Box>
 
-        {/* Bottom Navigation */}
-        <BottomNav currentView={currentView} onNavigate={handleNavigate} />
-      </ThemeProvider>
+          {/* Bottom Navigation */}
+          <BottomNav currentView={currentView} onNavigate={handleNavigate} />
+        </ThemeProvider>
+      </InteractionsProvider>
     </ErrorBoundary>
   );
 }
