@@ -37,6 +37,49 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Filtrage et tri automatiques
+  useEffect(() => {
+    let filtered = [...posts];
+
+    // Filtrage par catégorie
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter((post) => post.category === selectedCategory);
+    }
+
+    // Filtrage par recherche
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((post) =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.location.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filtrage par localisation
+    if (locationFilter.trim()) {
+      filtered = filtered.filter((post) =>
+        post.location.toLowerCase().includes(locationFilter.toLowerCase())
+      );
+    }
+
+    // Filtrage par date
+    if (dateRange[0] && dateRange[1]) {
+      filtered = filtered.filter((post) => {
+        const postDate = new Date(post.date);
+        return postDate >= dateRange[0] && postDate <= dateRange[1];
+      });
+    }
+
+    // Tri
+    if (sortBy === 'Newest') {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (sortBy === 'Oldest') {
+      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    setFilteredPosts(filtered);
+  }, [posts, selectedCategory, searchQuery, sortBy, dateRange, locationFilter]);
+
   // Error handling
   useEffect(() => {
     const handleError = (event) => {
@@ -88,61 +131,10 @@ function App() {
     };
   }, []);
 
-  if (!currentUser) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Login onLogin={(user) => setCurrentUser(user)} />
-      </ThemeProvider>
-    );
-  }
-
+  // Handler functions
   const handleNavigate = (view) => {
     setCurrentView(view);
   };
-
-  // Filtrage et tri automatiques
-  useEffect(() => {
-    let filtered = [...posts];
-
-    // Filtrage par catégorie
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter((post) => post.category === selectedCategory);
-    }
-
-    // Filtrage par recherche
-    if (searchQuery.trim()) {
-      filtered = filtered.filter((post) =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.location.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    // Filtrage par localisation
-    if (locationFilter.trim()) {
-      filtered = filtered.filter((post) =>
-        post.location.toLowerCase().includes(locationFilter.toLowerCase())
-      );
-    }
-
-    // Filtrage par date
-    if (dateRange[0] && dateRange[1]) {
-      filtered = filtered.filter((post) => {
-        const postDate = new Date(post.date);
-        return postDate >= dateRange[0] && postDate <= dateRange[1];
-      });
-    }
-
-    // Tri
-    if (sortBy === 'Newest') {
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else if (sortBy === 'Oldest') {
-      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
-
-    setFilteredPosts(filtered);
-  }, [posts, selectedCategory, searchQuery, sortBy, dateRange, locationFilter]);
 
   const handleSubmitPost = (formData) => {
     const newPost = {
@@ -180,6 +172,16 @@ function App() {
     setCurrentUser(null);
     setCurrentView('discover');
   };
+
+  // Show login if user is not authenticated
+  if (!currentUser) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Login onLogin={(user) => setCurrentUser(user)} />
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ErrorBoundary>
