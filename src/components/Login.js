@@ -5,9 +5,7 @@ import {
   Button,
   Typography,
   Paper,
-  Box,
-  Card,
-  CardContent
+  Box
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';

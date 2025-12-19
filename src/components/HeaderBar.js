@@ -6,7 +6,6 @@
 import React from 'react';
 import { Box, AppBar, Toolbar, Typography, IconButton, Avatar, InputBase } from '@mui/material';
 import {
-  Logout as LogoutIcon,
   Brightness4 as DarkModeIcon,
   Brightness7 as LightModeIcon,
   Search as SearchIcon,
@@ -172,7 +171,7 @@ const HeaderBar = ({ currentUser, onLogout, onProfileClick }) => {
               }}
               onClick={onProfileClick}
             >
-              {currentUser.name?.charAt(0).toUpperCase()}
+              {currentUser?.charAt(0).toUpperCase()}
             </Avatar>
           )}
         </Box>
