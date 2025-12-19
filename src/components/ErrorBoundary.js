@@ -37,16 +37,16 @@ class ErrorBoundary extends React.Component {
           <details style={{ whiteSpace: 'pre-wrap', marginTop: '20px' }}>
             {this.state.error && this.state.error.toString()}
             <br />
-            {this.state.errorInfo.componentStack}
+            {this.state.errorInfo && this.state.errorInfo.componentStack}
           </details>
-          <button 
+          <button
             onClick={() => this.setState({ hasError: false, error: null, errorInfo: null })}
-            style={{ 
-              marginTop: '20px', 
-              padding: '10px 20px', 
-              backgroundColor: '#1976d2', 
-              color: 'white', 
-              border: 'none', 
+            style={{
+              marginTop: '20px',
+              padding: '10px 20px',
+              backgroundColor: '#1976d2',
+              color: 'white',
+              border: 'none',
               borderRadius: '4px',
               cursor: 'pointer'
             }}
