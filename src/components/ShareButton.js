@@ -20,7 +20,6 @@ import {
 import {
   Box,
   IconButton,
-  Tooltip,
   Popover,
   Typography,
   Button
@@ -133,10 +132,10 @@ export default function ShareButton({ post }) {
   // Get localized social messages
   const getSocialMessage = (platform) => {
     const template = t(`share.messages.${platform}`, {
-      title: post.title,
-      location: post.location,
-      category: post.category.replace(/\s+/g, ''),
-      description: post.description.substring(0, 100) + (post.description.length > 100 ? '...' : '')
+      title: post.title || '',
+      location: post.location || '',
+      category: post.category?.replace(/\s+/g, '') || '',
+      description: post.description ? (post.description.substring(0, 100) + (post.description.length > 100 ? '...' : '')) : ''
     });
     return template;
   };
@@ -157,17 +156,25 @@ export default function ShareButton({ post }) {
   };
 
   const handleShare = (platform) => {
-    const shareCount = shareAnalytics.logShareEvent(platform, post.id, post.title, post.category);
+    const shareCount = shareAnalytics.logShareEvent(platform, post.id, post.title || '', post.category || '');
     console.log(`Post shared ${shareCount} time(s) on ${platform}`);
   };
 
   return (
     <>
-      <Tooltip title={t('share.title')}>
-        <IconButton onClick={handleShareClick} size="small">
-          <Share fontSize="small" />
-        </IconButton>
-      </Tooltip>
+      <IconButton
+        onClick={handleShareClick}
+        size="medium"
+        aria-label="Share"
+        sx={{
+          color: 'inherit',
+          '&:hover': {
+            backgroundColor: 'transparent',
+          },
+        }}
+      >
+        <Share />
+      </IconButton>
 
       <Popover
         open={open}
@@ -213,8 +220,8 @@ export default function ShareButton({ post }) {
 
           <LinkedinShareButton
             url={shareUrl}
-            title={post.title}
-            summary={post.description.substring(0, 100)}
+            title={post.title || ''}
+            summary={post.description ? post.description.substring(0, 100) : ''}
             beforeOnClick={() => handleShare('linkedin')}
           >
             <LinkedinIcon size={32} round />
@@ -257,8 +264,8 @@ export default function ShareButton({ post }) {
 
           <EmailShareButton
             url={shareUrl}
-            subject={t('share.messages.emailSubject', { title: post.title })}
-            body={`${post.title}\n\n${post.description}\n\n${t('share.messages.email')}: ${shareUrl}`}
+            subject={t('share.messages.emailSubject', { title: post.title || '' })}
+            body={`${post.title || ''}\n\n${post.description || ''}\n\n${t('share.messages.email')}: ${shareUrl}`}
             beforeOnClick={() => handleShare('email')}
           >
             <EmailIcon size={32} round />

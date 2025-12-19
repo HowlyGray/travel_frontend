@@ -7,6 +7,8 @@ export const mockPosts = [
     category: "Aventure",
     date: "2023-10-15",
     author: "User",
+    likes: [],
+    comments: [],
     images: [
       {
         id: 1,
@@ -39,6 +41,8 @@ export const mockPosts = [
     category: "Nourriture",
     date: "2023-09-22",
     author: "User",
+    likes: [],
+    comments: [],
     images: [
       {
         id: 4,
@@ -64,6 +68,8 @@ export const mockPosts = [
     category: "Culture",
     date: "2023-08-10",
     author: "User",
+    likes: [],
+    comments: [],
     images: [
       {
         id: 6,
@@ -103,6 +109,8 @@ export const mockPosts = [
     category: "Aventure",
     date: "2023-07-05",
     author: "User",
+    likes: [],
+    comments: [],
     images: [
       {
         id: 10,
@@ -121,6 +129,8 @@ export const mockPosts = [
     category: "Aventure",
     date: "2023-06-18",
     author: "User",
+    likes: [],
+    comments: [],
     images: [
       {
         id: 11,

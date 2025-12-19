@@ -223,11 +223,7 @@ const PostCard = ({ post, onUpdate }) => {
                 <CommentIcon />
               </IconButton>
 
-              <ShareButton
-                url={`https://example.com/post/${post.id}`}
-                title={post.title}
-                description={post.description}
-              />
+              <ShareButton post={post} />
             </Box>
 
             <IconButton
